@@ -1,0 +1,62 @@
+//utils
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+//football pitch config
+$court: (
+        lineWidth: 1rem,
+        penaltyBox: (
+                width: 200px,
+                height: 80%,
+                margin: 20%
+        ),
+        middleCircleSize: 30%
+);
+
+// football pith
+.element {
+  $penaltyBox: linear-gradient(180deg,
+          darkgreen 0, darkgreen map-deep-get($court, penaltyBox, margin), // green margin
+          white map-deep-get($court, penaltyBox, margin), white calc(#{map-deep-get($court, penaltyBox, margin)} + #{map-get($court, lineWidth)}), //white line 1
+          transparent calc(#{map-deep-get($court, penaltyBox, margin)} + #{map-get($court, lineWidth)}), transparent calc(#{map-deep-get($court, penaltyBox, height)} - #{map-get($court, lineWidth)}), //green penalty box
+          white calc(#{map-deep-get($court, penaltyBox, height)} - #{map-get($court, lineWidth)}), white map-deep-get($court, penaltyBox, height), //white line 2
+          darkgreen map-deep-get($court, penaltyBox, height), darkgreen); //rest of green margin
+
+  width: 100%;
+  height: 500px;
+  background-color: darkgreen;
+  background-image: $penaltyBox,
+  linear-gradient(90deg,
+                  transparent 0, transparent map-deep-get($court, penaltyBox, width),
+                  white map-deep-get($court, penaltyBox, width), white calc(#{map-deep-get($court, penaltyBox, width)} + #{map-get($court, lineWidth)}),
+                  transparent calc(#{map-deep-get($court, penaltyBox, width)} + #{map-get($court, lineWidth)}), transparent), //penalty box vertical line
+  linear-gradient(90deg, white 0, white 100%), // middle white line
+  radial-gradient(circle, white 45%, transparent 45%, transparent 45%), //small circle
+  radial-gradient(circle, darkgreen 45%, transparent 45%, transparent 45%), // big circle green
+  radial-gradient(circle, white 45%, transparent 45%, transparent 45%), // big circle white - to create line
+  $penaltyBox,
+  linear-gradient(90deg, white 0, white 100%);
+  background-repeat: no-repeat;
+  background-size:
+          calc(#{map-deep-get($court, penaltyBox, width)} + #{map-get($court, lineWidth)}) 100%,
+          100% 100%,
+          map-get($court, lineWidth) 100%,
+          calc(#{map-get($court, lineWidth)} * 5) calc(#{map-get($court, lineWidth)} * 5),
+          map-get($court, middleCircleSize) map-get($court, middleCircleSize),
+          calc(#{map-get($court, middleCircleSize)} + #{map-get($court, lineWidth)}) calc(#{map-get($court, middleCircleSize)} + #{map-get($court, lineWidth)}),
+          calc(#{map-deep-get($court, penaltyBox, width)} + #{map-get($court, lineWidth)}) 100%,
+          map-get($court, lineWidth) 100%;
+  background-position:
+          0 0,
+          0 0,
+          calc(50% - #{map-get($court, lineWidth)} / 2) 0,
+          calc(50% - #{map-get($court, lineWidth)} / 2),
+          calc(50% - #{map-get($court, lineWidth)} / 2),
+          calc(50% - #{map-get($court, lineWidth)} / 2),
+          100% 0,
+          calc(100% - #{map-deep-get($court, penaltyBox, width)}) 0;
+}

@@ -1,0 +1,43 @@
+
+
+$margin: 2rem;
+
+* {
+  margin: 0;
+}
+
+body {
+  background: rgba(56, 55, 95, 0.95)
+              repeating-linear-gradient(45deg,
+                  rgb(56, 55, 95) 0, rgb(56, 55, 95) 2rem,
+                  rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .1) 2.05rem,
+                  transparent 0, transparent 3.95rem,
+                  rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .1) 4rem
+              );
+}
+
+main {
+  position: relative;
+  background: rgba(255, 255, 255, .15);
+  width: 50rem;
+  margin: $margin auto;
+  height: calc(100vh - #{($margin * 2)});
+  box-shadow: 0 0 0 ($margin / 4) rgba(0, 0, 0, .2),
+              0 0 0 ($margin / 2) rgba(0, 0, 0, .2);
+
+  > a {
+    display: block;
+    width: 10rem;
+    padding: 1rem;
+    font-size: 100%;
+    position: absolute;
+    bottom: -1.5rem;
+    left: calc(50% - 5.5rem);
+    background: mediumaquamarine;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+  }
+}
