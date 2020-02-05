@@ -3,7 +3,7 @@ import '../style.scss';
 import * as sourceHtml from '../source.html';
 
 const BUTTON_DATA = {
-  url: 'http://google.com',
+  url: 'https://dev.to/fasosnql/css-challenge-1-3d8g',
   text: 'Go to article!'
 };
 
